@@ -41,7 +41,8 @@ public partial class Main : Node2D
         if (intersection.Count > 0)
         {
             Unit collider = (Unit)intersection[0]["collider"];
-            if (collider is PlayerUnit)
+            GD.Print("Collider is: " + collider.Name);
+            if (collider is PlayerUnit || collider is EnemyUnit)
             {
                 return collider;
             }
@@ -86,10 +87,12 @@ public partial class Main : Node2D
 
         if (target != null && !target.isPlayer )
         {
+            GD.Print("targeting NPC!");
             selectedUnit.SetTarget(target);
 
         } else
         {
+            GD.Print("Enemy not selected, moving to position");
             selectedUnit.MoveToLocation(GetGlobalMousePosition());
         }
     }
