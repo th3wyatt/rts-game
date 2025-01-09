@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://m6bmlhqqiw1k"]
+
+[ext_resource type="Script" path="res://Unit.cs" id="1_meptf"]
+[ext_resource type="Texture2D" uid="uid://dxk0cbnbt8hlo" path="res://Assets/Units/oryx_16bit_fantasy_creatures_01.png" id="1_yoy3x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emyes"]
+size = Vector2(22, 24)
+
+[node name="Unit" type="CharacterBody2D" node_paths=PackedStringArray("agent", "sprite", "flashTimer")]
+script = ExtResource("1_meptf")
+agent = NodePath("NavigationAgent2D")
+sprite = NodePath("Sprite")
+flashTimer = NodePath("Timer")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_yoy3x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_emyes")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 1.0
+target_desired_distance = 1.0
+path_max_distance = 10.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
