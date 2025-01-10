@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=4 uid="uid://taxvwpwtv317"]
+[gd_scene load_steps=12 format=4 uid="uid://taxvwpwtv317"]
 
-[ext_resource type="Script" path="res://Main.cs" id="1_igwyv"]
-[ext_resource type="Texture2D" uid="uid://t65il7mjc4g7" path="res://Assets/oryx_16bit_fantasy_world_trans.png" id="1_xybkr"]
-[ext_resource type="Script" path="res://Camera.cs" id="3_mj05u"]
-[ext_resource type="PackedScene" uid="uid://c23ld6nokmp38" path="res://enemy_unit.tscn" id="3_ulldq"]
-[ext_resource type="PackedScene" uid="uid://ctp35kbkwx2i0" path="res://player_unit.tscn" id="4_oguch"]
+[ext_resource type="Script" path="res://Scripts/Main.cs" id="1_bc11n"]
+[ext_resource type="Texture2D" uid="uid://t65il7mjc4g7" path="res://Assets/oryx_16bit_fantasy_world_trans.png" id="2_optns"]
+[ext_resource type="Script" path="res://Scripts/Camera.cs" id="3_s4djx"]
+[ext_resource type="PackedScene" uid="uid://ctp35kbkwx2i0" path="res://Scenes/player_unit.tscn" id="4_842g8"]
+[ext_resource type="PackedScene" uid="uid://c23ld6nokmp38" path="res://Scenes/enemy_unit.tscn" id="5_x20i0"]
+[ext_resource type="PackedScene" uid="uid://0boas2ku2ufk" path="res://Scenes/resource_node.tscn" id="6_mmc6f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0y07e"]
-texture = ExtResource("1_xybkr")
+texture = ExtResource("2_optns")
 texture_region_size = Vector2i(24, 24)
 1:1/0 = 0
 2:1/0 = 0
@@ -1837,7 +1838,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(298, -368, 36, -368, 36
 agent_radius = 1.0
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("players", "enemies")]
-script = ExtResource("1_igwyv")
+script = ExtResource("1_bc11n")
 players = NodePath("PlayerUnits")
 enemies = NodePath("EnemyUnits")
 
@@ -1878,18 +1879,22 @@ navigation_polygon = SubResource("NavigationPolygon_5wauo")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("camera")]
 zoom = Vector2(0.5, 0.5)
-script = ExtResource("3_mj05u")
+script = ExtResource("3_s4djx")
 camera = NodePath(".")
 movementSpeed = 256.0
 
 [node name="PlayerUnits" type="Node" parent="."]
 
-[node name="PlayerUnit" parent="PlayerUnits" instance=ExtResource("4_oguch")]
+[node name="PlayerUnit" parent="PlayerUnits" instance=ExtResource("4_842g8")]
 position = Vector2(-208, 29)
 
 [node name="EnemyUnits" type="Node" parent="."]
 
-[node name="EnemyUnit" parent="EnemyUnits" instance=ExtResource("3_ulldq")]
+[node name="EnemyUnit" parent="EnemyUnits" instance=ExtResource("5_x20i0")]
 position = Vector2(53, 31)
 health = 70.0
 moveSpeed = 35.0
+
+[node name="ResourceNodes" type="Node" parent="."]
+
+[node name="ResourceNode" parent="ResourceNodes" instance=ExtResource("6_mmc6f")]

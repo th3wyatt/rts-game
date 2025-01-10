@@ -38,19 +38,28 @@ public partial class Main : Node2D
         query.Position = GetGlobalMousePosition();
         Array<Dictionary> intersection = space.IntersectPoint(query, 1);
 
-        if (intersection.Count > 0)
+        try
         {
-            Unit collider = (Unit)intersection[0]["collider"];
-            GD.Print("Collider is: " + collider.Name);
-            if (collider is PlayerUnit || collider is EnemyUnit)
+            if (intersection.Count > 0)
             {
-                return collider;
+                Unit collider = (Unit)intersection[0]["collider"];
+                if(collider is PlayerUnit)
+                {
+                    return collider;
+                }
+                
             }
         }
+        catch (System.Exception)
+        {
+            GD.Print("Not a selectable Item");
+            return null;
+        }
+        
         return null;
     }
 
-    private void TrySelectUnit()
+        private void TrySelectUnit()
     {
         PlayerUnit unit = (PlayerUnit)GetSelectedUnit();
 

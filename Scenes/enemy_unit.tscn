@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c23ld6nokmp38"]
 
-[ext_resource type="PackedScene" uid="uid://m6bmlhqqiw1k" path="res://unit.tscn" id="1_krth5"]
-[ext_resource type="Script" path="res://EnemyUnit.cs" id="2_g1auw"]
+[ext_resource type="PackedScene" uid="uid://m6bmlhqqiw1k" path="res://Scenes/unit.tscn" id="1_krth5"]
+[ext_resource type="Script" path="res://Scripts/EnemyUnit.cs" id="2_g1auw"]
 [ext_resource type="Texture2D" uid="uid://nm3eanvpgqgd" path="res://Assets/Units/oryx_16bit_fantasy_creatures_120.png" id="3_jvnkc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yo1dm"]
