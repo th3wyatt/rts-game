@@ -1,15 +1,13 @@
 using Godot;
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.Numerics;
 using Vector2 = Godot.Vector2;
 
 public partial class Camera : Camera2D
 {
     [Export] Camera2D camera;
-    [Export,Range(0,1000)] private float movementSpeed = 64;
-    [Export,Range(1,5)] private float minZoom = 1;
-    [Export,Range(1,5)] private float maxZoom = 3;
+    [Export(PropertyHint.Range, "0,1000")] private float movementSpeed = 64;
+    [Export(PropertyHint.Range, "0,5,.1")] private float minZoom = 1;
+    [Export(PropertyHint.Range, "0,5,.1")] private float maxZoom = 3;
     private bool isPanning = false;
     private bool allowZoom = true;
     private Vector2 zoomLevel;
@@ -31,7 +29,6 @@ public partial class Camera : Camera2D
                 HandleZoom(delta);
             }
         }
-
     }
 
     private void HandleZoom(double delta)
@@ -39,7 +36,6 @@ public partial class Camera : Camera2D
         zoomLevel = zoomLevel.Clamp(minZoom, maxZoom);
         camera.Zoom = camera.Zoom.Lerp(zoomLevel, 0.1f);
     }
-
 
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -77,6 +73,4 @@ public partial class Camera : Camera2D
             camera.GlobalTranslate(direction * movementSpeed * (float)delta);
         }
     }
-
-
 }
