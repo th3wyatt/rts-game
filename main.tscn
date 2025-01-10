@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://taxvwpwtv317"]
+[gd_scene load_steps=11 format=4 uid="uid://taxvwpwtv317"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_igwyv"]
 [ext_resource type="Texture2D" uid="uid://t65il7mjc4g7" path="res://Assets/oryx_16bit_fantasy_world_trans.png" id="1_xybkr"]
+[ext_resource type="Script" path="res://Camera.cs" id="3_mj05u"]
 [ext_resource type="PackedScene" uid="uid://c23ld6nokmp38" path="res://enemy_unit.tscn" id="3_ulldq"]
 [ext_resource type="PackedScene" uid="uid://ctp35kbkwx2i0" path="res://player_unit.tscn" id="4_oguch"]
 
@@ -1875,8 +1876,11 @@ navigation_polygon = SubResource("NavigationPolygon_f7eck")
 [node name="NavigationRegion2D3" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_5wauo")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("camera")]
 zoom = Vector2(0.5, 0.5)
+script = ExtResource("3_mj05u")
+camera = NodePath(".")
+movementSpeed = 256.0
 
 [node name="PlayerUnits" type="Node" parent="."]
 
