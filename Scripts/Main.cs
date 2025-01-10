@@ -43,11 +43,8 @@ public partial class Main : Node2D
             if (intersection.Count > 0)
             {
                 Unit collider = (Unit)intersection[0]["collider"];
-                if(collider is PlayerUnit)
-                {
-                    return collider;
-                }
                 
+                return collider;
             }
         }
         catch (System.Exception)
@@ -61,11 +58,11 @@ public partial class Main : Node2D
 
         private void TrySelectUnit()
     {
-        PlayerUnit unit = (PlayerUnit)GetSelectedUnit();
+        Unit unit = (Unit)GetSelectedUnit();
 
         if (unit != null && unit.isPlayer)
         {
-            SelectUnit(unit);
+            SelectUnit((PlayerUnit)unit);
         }else
         {
             UnselectUnit();
