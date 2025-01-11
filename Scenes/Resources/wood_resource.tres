@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MaterialResource" load_steps=2 format=3 uid="uid://ylvu55iijgnw"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/MaterialResource.cs" id="1_nrl7q"]
+
+[resource]
+script = ExtResource("1_nrl7q")
+materialType = 0
+MaterialValue = 0
+MaterialMax = 10000

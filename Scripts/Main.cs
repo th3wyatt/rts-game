@@ -9,6 +9,7 @@ public partial class Main : Node2D
     private PlayerUnit selectedUnit;
     [Export] public Node players;
     [Export] public Node enemies;
+    [Export] public MaterialResource wood;
 
     public override void _Ready()
     {

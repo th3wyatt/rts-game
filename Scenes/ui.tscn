@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctep4c8xq84ov"]
+
+[ext_resource type="Texture2D" uid="uid://t65il7mjc4g7" path="res://Assets/oryx_16bit_fantasy_world_trans.png" id="1_482v8"]
+[ext_resource type="Script" path="res://Scripts/ResourceLabel.cs" id="2_4ge85"]
+[ext_resource type="Resource" uid="uid://ylvu55iijgnw" path="res://Scenes/Resources/wood_resource.tres" id="3_jmcgb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks3ui"]
+atlas = ExtResource("1_482v8")
+region = Rect2(1284, 204, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_102we"]
+atlas = ExtResource("1_482v8")
+region = Rect2(1104, 72, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3hta"]
+atlas = ExtResource("1_482v8")
+region = Rect2(792, 96, 24, 24)
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="MainPanel" type="PanelContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -96.0
+offset_right = 92.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 8
+
+[node name="ResourcesContainer" type="VBoxContainer" parent="MainPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/ResourcesContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="TextureRect" parent="MainPanel/MarginContainer/ResourcesContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ks3ui")
+
+[node name="WoodResourceLabel" type="Label" parent="MainPanel/MarginContainer/ResourcesContainer/HBoxContainer"]
+layout_mode = 2
+text = "100"
+script = ExtResource("2_4ge85")
+materialResource = ExtResource("3_jmcgb")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainPanel/MarginContainer/ResourcesContainer"]
+layout_mode = 2
+
+[node name="PanelContainer2" type="TextureRect" parent="MainPanel/MarginContainer/ResourcesContainer/HBoxContainer2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_102we")
+
+[node name="StoneResourceLabel" type="Label" parent="MainPanel/MarginContainer/ResourcesContainer/HBoxContainer2"]
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MainPanel/MarginContainer/ResourcesContainer"]
+layout_mode = 2
+
+[node name="PanelContainer3" type="TextureRect" parent="MainPanel/MarginContainer/ResourcesContainer/HBoxContainer3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_c3hta")
+
+[node name="GoldResourceLabel" type="Label" parent="MainPanel/MarginContainer/ResourcesContainer/HBoxContainer3"]
+layout_mode = 2
+text = "100"

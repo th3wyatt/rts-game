@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cwgfgbk4ff0d3" path="res://Assets/tile_0060.png" id="2_itwmd"]
 
 [node name="PlayerUnit" node_paths=PackedStringArray("selectionVisual") instance=ExtResource("1_2f5nm")]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("2_ddfas")
 selectionVisual = NodePath("SelectionVisual")
 isPlayer = true

@@ -64,12 +64,13 @@ public partial class Unit : CharacterBody2D
         {
             agent.TargetPosition = GlobalPosition;
             TryAttackTarget();
+
         }else
         {
                 agent.TargetPosition = target.GlobalPosition;
         }
     }
-    
+
 
     private void TakeDamage(float damageToTake)
     {
