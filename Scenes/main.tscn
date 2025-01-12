@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://taxvwpwtv317"]
+[gd_scene load_steps=15 format=4 uid="uid://taxvwpwtv317"]
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_bc11n"]
 [ext_resource type="Texture2D" uid="uid://t65il7mjc4g7" path="res://Assets/oryx_16bit_fantasy_world_trans.png" id="2_optns"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://xpp6f7f1fwhs" path="res://Scenes/player_villager_unit.tscn" id="5_popbi"]
 [ext_resource type="PackedScene" uid="uid://c23ld6nokmp38" path="res://Scenes/enemy_unit.tscn" id="5_x20i0"]
 [ext_resource type="PackedScene" uid="uid://0boas2ku2ufk" path="res://Scenes/resource_node.tscn" id="6_mmc6f"]
+[ext_resource type="PackedScene" uid="uid://bwe625l0vjd8l" path="res://Scenes/town_hall.tscn" id="9_gv47s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0y07e"]
 texture = ExtResource("2_optns")
@@ -1896,10 +1897,10 @@ position = Vector2(-208, 29)
 position = Vector2(-830, -497)
 
 [node name="PlayerVillagerUnit2" parent="PlayerUnits" instance=ExtResource("5_popbi")]
-position = Vector2(-830, -497)
+position = Vector2(-874, -467)
 
 [node name="PlayerVillagerUnit3" parent="PlayerUnits" instance=ExtResource("5_popbi")]
-position = Vector2(-830, -497)
+position = Vector2(-919, -477)
 
 [node name="EnemyUnits" type="Node" parent="."]
 
@@ -1908,7 +1909,12 @@ position = Vector2(53, 31)
 health = 70.0
 moveSpeed = 35.0
 
+[node name="PlayerStructures" type="Node" parent="."]
+
 [node name="ResourceNodes" type="Node" parent="."]
 
 [node name="ResourceNode" parent="ResourceNodes" instance=ExtResource("6_mmc6f")]
 amount = 10000
+
+[node name="TownHall" parent="." instance=ExtResource("9_gv47s")]
+position = Vector2(-946, -595)
