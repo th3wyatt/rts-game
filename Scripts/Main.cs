@@ -10,6 +10,7 @@ public partial class Main : Node2D
     [Export] public Node players;
     [Export] public Node enemies;
     [Export] public MaterialResource wood;
+    [Export] private UiController uiController;
 
     public override void _Ready()
     {
@@ -64,11 +65,18 @@ public partial class Main : Node2D
         if (unit != null && unit.isPlayer)
         {
             SelectUnit((PlayerUnit)unit);
+            ShowUnitDetails(unit);
         }else
         {
             UnselectUnit();
         }
     }
+
+    private void ShowUnitDetails(Unit unit)
+    {
+        uiController.SelectionPanel.Visible = true;
+    }
+
 
     private void SelectUnit(PlayerUnit unit)
     {
@@ -83,6 +91,7 @@ public partial class Main : Node2D
         {
             selectedUnit.ToggleSelectionVisual();
         } 
+        uiController.SelectionPanel.Visible = false;
         selectedUnit = null;
     }
 

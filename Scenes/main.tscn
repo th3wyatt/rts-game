@@ -1840,10 +1840,11 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(298, -368, 36, -368, 36, -393, -45, -392, -42, -368, -300, -367, -299, -131, -331, -130, -330, -53, -298, -51, -299, 160, -42, 159, -42, 186, 35, 186, 35, 159, 299, 158, 299, -53, 321, -52, 322, -134, 304, -131)])
 agent_radius = 1.0
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("players", "enemies")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("players", "enemies", "uiController")]
 script = ExtResource("1_bc11n")
 players = NodePath("PlayerUnits")
 enemies = NodePath("EnemyUnits")
+uiController = NodePath("UI")
 
 [node name="UI" parent="." instance=ExtResource("2_st5tc")]
 
