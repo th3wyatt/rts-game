@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_emyes"]
 size = Vector2(22, 24)
 
-[node name="Unit" type="CharacterBody2D" node_paths=PackedStringArray("agent", "sprite", "flashTimer")]
+[node name="Unit" type="CharacterBody2D" node_paths=PackedStringArray("agent", "sprite", "flashTimer") groups=["units"]]
 script = ExtResource("1_meptf")
 agent = NodePath("NavigationAgent2D")
 sprite = NodePath("Sprite")

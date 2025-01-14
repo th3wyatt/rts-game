@@ -9,8 +9,9 @@ public partial class Main : Node2D
     private PlayerUnit selectedUnit;
     [Export] public Node players;
     [Export] public Node enemies;
-    [Export] public MaterialResource wood;
     [Export] private UiController uiController;
+    [Export] private SelectionBox selectionBox;
+    
 
     public override void _Ready()
     {
@@ -20,96 +21,115 @@ public partial class Main : Node2D
 
     public override void _Input(InputEvent @event)
     {
-        base._Input(@event);
-        if (@event is InputEventMouseButton mouseEvent && @event.IsPressed())
+        if(Input.IsActionJustPressed(GameConstants.SELECT_UNIT))
         {
-            if (mouseEvent.ButtonIndex == MouseButton.Left)
-            {
-                TrySelectUnit();
-            }else if (mouseEvent.ButtonIndex == MouseButton.Right)
-            {
-                TryCommandUnit();
-            }
-        }
-    }
+            GD.Print("Starting unit selection");
+            selectionBox.Visible = true;
+            selectionBox.StartSelection();
+            
+            // TrySelectUnit();
 
-    private Unit GetSelectedUnit()
-    {
-        PhysicsDirectSpaceState2D space = GetWorld2D().DirectSpaceState;
-        PhysicsPointQueryParameters2D query = new();
-        query.Position = GetGlobalMousePosition();
-        Array<Dictionary> intersection = space.IntersectPoint(query, 1);
+        } else if (Input.IsActionJustPressed(GameConstants.COMMAND_UNIT))
+        {
+            TryCommandUnit();
 
-        try
+        } else if (@event is InputEventMouseMotion)
         {
-            if (intersection.Count > 0)
-            {
-                Unit collider = (Unit)intersection[0]["collider"];
-                
-                return collider;
-            }
-        }
-        catch (System.Exception)
-        {
-            GD.Print("Not a selectable Item");
-            return null;
+            selectionBox.DragSelectionBox();
+            
+        } else if(Input.IsActionJustReleased(GameConstants.SELECT_UNIT)){
+
+            GD.Print("unselecting units");
+            UnselectUnits();
+            GD.Print("calling EndSeleciton()");
+            selectionBox.EndSelection();
+            GD.Print("selecting new units");
+            SelectUnits();
         }
         
-        return null;
     }
 
-        private void TrySelectUnit()
+    private void SelectUnits()
     {
-        Unit unit = (Unit)GetSelectedUnit();
-
-        if (unit != null && unit.isPlayer)
+        Array<Node> selectedUnits = GetTree().GetNodesInGroup(GameConstants.SELECTED_UNITS);
+        
+        if(selectedUnits.Count > 0)
         {
-            SelectUnit((PlayerUnit)unit);
-            ShowUnitDetails(unit);
-        }else
-        {
-            UnselectUnit();
-        }
-    }
-
-    private void ShowUnitDetails(Unit unit)
-    {
-        uiController.SelectionPanel.Visible = true;
-    }
-
-
-    private void SelectUnit(PlayerUnit unit)
-    {
-        UnselectUnit();
-        selectedUnit = unit;
-        selectedUnit.ToggleSelectionVisual();
-    }
-
-    private void UnselectUnit()
-    {
-        if (selectedUnit != null)
-        {
-            selectedUnit.ToggleSelectionVisual();
+            foreach (Node item in selectedUnits)
+            {
+                try
+                {
+                    PlayerUnit unit = (PlayerUnit)item;
+                    unit.ToggleSelectionVisual();
+                }
+                catch (Exception)
+                {
+                    
+                    GD.Print("could not add selected visual to this unit");
+                }
+              
+            }
         } 
+    }
+
+    private void UnselectUnits()
+    {
+        Array<Node> selectedUnits = GetTree().GetNodesInGroup(GameConstants.SELECTED_UNITS);
+        
+        if(selectedUnits.Count > 0)
+        {
+            foreach (Node item in selectedUnits)
+            {
+                try
+                {
+                    PlayerUnit unit = (PlayerUnit)item;
+                    unit.ToggleSelectionVisual();
+                    unit.RemoveFromGroup(GameConstants.SELECTED_UNITS);
+
+                }
+                catch (System.Exception)
+                {
+                    
+                    GD.Print("could not remove selected visual to this unit");
+                }
+              
+            }
+        }
         uiController.SelectionPanel.Visible = false;
-        selectedUnit = null;
+
     }
 
     private void TryCommandUnit()
     {
-        if (!IsInstanceValid(selectedUnit)) { return; }
-
-        Unit target = GetSelectedUnit();
-
-        if (target != null && !target.isPlayer )
+        Array<Node> selectedUnits = GetTree().GetNodesInGroup(GameConstants.SELECTED_UNITS);
+        
+        if(selectedUnits.Count > 0)
         {
-            GD.Print("targeting NPC!");
-            selectedUnit.SetTarget(target);
+            foreach (Node item in selectedUnits)
+            {
+                try
+                {
+                    Unit target = selectionBox.GetSelectedUnit();
+                    PlayerUnit unit = (PlayerUnit)item;
+                    if (target != null && !target.isPlayer )
+                    {
+                        GD.Print("targeting NPC!");
+                        unit.SetTarget(target);
 
-        } else
-        {
-            GD.Print("Enemy not selected, moving to position");
-            selectedUnit.MoveToLocation(GetGlobalMousePosition());
+                    } else
+                    {
+                        GD.Print("Enemy not selected, moving to position");
+                        unit.MoveToLocation(GetGlobalMousePosition());
+                    }
+                }
+                catch (System.Exception)
+                {
+                    
+                    GD.Print("could not remove selected visual to this unit");
+                }
+              
+            }
         }
+       
     }
 }

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwdgtfvhwpklc"]
+
+[ext_resource type="Script" path="res://Scripts/SelectionBox.cs" id="1_cp5b8"]
+[ext_resource type="Texture2D" uid="uid://t65il7mjc4g7" path="res://Assets/oryx_16bit_fantasy_world_trans.png" id="2_30td4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tccqk"]
+atlas = ExtResource("2_30td4")
+region = Rect2(288, 696, 24, 24)
+
+[node name="SelectionBox" type="Node2D" node_paths=PackedStringArray("ninePatchRect")]
+script = ExtResource("1_cp5b8")
+ninePatchRect = NodePath("NinePatchRect")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+top_level = true
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_tccqk")
+region_rect = Rect2(0, 0, 24, 24)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
