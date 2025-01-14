@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://taxvwpwtv317"]
+[gd_scene load_steps=17 format=4 uid="uid://taxvwpwtv317"]
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_bc11n"]
 [ext_resource type="Texture2D" uid="uid://t65il7mjc4g7" path="res://Assets/oryx_16bit_fantasy_world_trans.png" id="2_optns"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://0boas2ku2ufk" path="res://Scenes/resource_node.tscn" id="6_mmc6f"]
 [ext_resource type="PackedScene" uid="uid://bwe625l0vjd8l" path="res://Scenes/town_hall.tscn" id="9_gv47s"]
 [ext_resource type="PackedScene" uid="uid://cwdgtfvhwpklc" path="res://Scenes/selection_box.tscn" id="10_4r5jf"]
+[ext_resource type="AudioStream" uid="uid://dsaxssm2jn3uh" path="res://Assets/Town_-_Campfire_Tales.ogg" id="11_emkij"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0y07e"]
 texture = ExtResource("2_optns")
@@ -1927,3 +1928,8 @@ amount = 10000
 [node name="SelectionBox" parent="." instance=ExtResource("10_4r5jf")]
 visible = false
 position = Vector2(0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_emkij")
+autoplay = true
+parameters/looping = true
