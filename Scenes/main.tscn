@@ -1898,15 +1898,19 @@ movementSpeed = 503.619
 
 [node name="PlayerUnit" parent="PlayerUnits" instance=ExtResource("4_842g8")]
 position = Vector2(-208, 29)
+collision_mask = 3
 
 [node name="PlayerVillagerUnit" parent="PlayerUnits" instance=ExtResource("5_popbi")]
 position = Vector2(-830, -497)
+collision_mask = 3
 
 [node name="PlayerVillagerUnit2" parent="PlayerUnits" instance=ExtResource("5_popbi")]
 position = Vector2(-874, -467)
+collision_mask = 3
 
 [node name="PlayerVillagerUnit3" parent="PlayerUnits" instance=ExtResource("5_popbi")]
 position = Vector2(-919, -477)
+collision_mask = 3
 
 [node name="EnemyUnits" type="Node" parent="."]
 

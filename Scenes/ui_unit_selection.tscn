@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqrvt7rnsdncl"]
+
+[ext_resource type="Texture2D" uid="uid://cq3odjwe2eu4" path="res://Assets/Units/oryx_16bit_fantasy_creatures_38.png" id="1_3k845"]
+[ext_resource type="Script" path="res://Scripts/UiUnitSelection.cs" id="1_bwgjr"]
+
+[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("texture", "healthLabel")]
+theme_override_constants/separation = 8
+script = ExtResource("1_bwgjr")
+texture = NodePath("TextureRect")
+healthLabel = NodePath("HealthLabel")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_3k845")
+
+[node name="HealthLabel" type="Label" parent="."]
+layout_mode = 2
+text = "100"

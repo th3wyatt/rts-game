@@ -1,14 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctp35kbkwx2i0"]
+[gd_scene load_steps=5 format=3 uid="uid://ctp35kbkwx2i0"]
 
 [ext_resource type="PackedScene" uid="uid://m6bmlhqqiw1k" path="res://Scenes/unit.tscn" id="1_2f5nm"]
 [ext_resource type="Script" path="res://Scripts/PlayerUnit.cs" id="2_ddfas"]
 [ext_resource type="Texture2D" uid="uid://cwgfgbk4ff0d3" path="res://Assets/tile_0060.png" id="2_itwmd"]
+[ext_resource type="PackedScene" uid="uid://dqrvt7rnsdncl" path="res://Scenes/ui_unit_selection.tscn" id="3_lqijg"]
 
 [node name="PlayerUnit" node_paths=PackedStringArray("selectionVisual") instance=ExtResource("1_2f5nm")]
 collision_layer = 2
-collision_mask = 0
+collision_mask = 2
 script = ExtResource("2_ddfas")
 selectionVisual = NodePath("SelectionVisual")
+uiSelectionItem = ExtResource("3_lqijg")
 isPlayer = true
 
 [node name="SelectionVisual" type="Sprite2D" parent="." index="0"]

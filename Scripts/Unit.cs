@@ -7,10 +7,10 @@ public partial class Unit : CharacterBody2D
 {
     protected Unit target = null;
     [Export] private NavigationAgent2D agent;
-    [Export] private Sprite2D sprite;
-    [Export] private ProgressBar healthBar;
+    [Export] public Sprite2D sprite {get; private set;}
+    [Export] protected ProgressBar healthBar;
     [Export] private float maxHealth = 100;
-    [Export] private float health = 100;
+    [Export] public float health {get; private set;} = 100;
     [Export] private int damage = 20;
     [Export] private float moveSpeed = 50.0f;
     [Export] private float attackRange = 25.0f;

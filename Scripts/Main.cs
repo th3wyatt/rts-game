@@ -23,12 +23,9 @@ public partial class Main : Node2D
     {
         if(Input.IsActionJustPressed(GameConstants.SELECT_UNIT))
         {
-            GD.Print("Starting unit selection");
             selectionBox.Visible = true;
             selectionBox.StartSelection();
             
-            // TrySelectUnit();
-
         } else if (Input.IsActionJustPressed(GameConstants.COMMAND_UNIT))
         {
             TryCommandUnit();
@@ -39,11 +36,8 @@ public partial class Main : Node2D
             
         } else if(Input.IsActionJustReleased(GameConstants.SELECT_UNIT)){
 
-            GD.Print("unselecting units");
             UnselectUnits();
-            GD.Print("calling EndSeleciton()");
             selectionBox.EndSelection();
-            GD.Print("selecting new units");
             SelectUnits();
         }
         
@@ -61,6 +55,8 @@ public partial class Main : Node2D
                 {
                     PlayerUnit unit = (PlayerUnit)item;
                     unit.ToggleSelectionVisual();
+                    uiController.unitSelectionGrid.AddChild(unit.uiSelectionPanel);
+                    uiController.SelectionPanel.Visible = true;
                 }
                 catch (Exception)
                 {
@@ -94,6 +90,11 @@ public partial class Main : Node2D
                 }
               
             }
+            foreach (Node item in uiController.unitSelectionGrid.GetChildren())
+            {
+                uiController.unitSelectionGrid.RemoveChild(item);
+            }
+            uiController.SelectionPanel.Visible = false;
         }
         uiController.SelectionPanel.Visible = false;
 
