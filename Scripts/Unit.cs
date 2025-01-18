@@ -8,6 +8,8 @@ public partial class Unit : CharacterBody2D
     protected Unit target = null;
     [Export] private NavigationAgent2D agent;
     [Export] private Sprite2D sprite;
+    [Export] private ProgressBar healthBar;
+    [Export] private float maxHealth = 100;
     [Export] private float health = 100;
     [Export] private int damage = 20;
     [Export] private float moveSpeed = 50.0f;
@@ -20,6 +22,8 @@ public partial class Unit : CharacterBody2D
 
     public override void _Ready()
     {
+        healthBar.MaxValue = maxHealth;
+        healthBar.Value = health;
         flashTimer.Timeout += HandleTimeout;
         GameManager = (Main)GetTree().Root.GetChild(0);
         target = null;
@@ -78,12 +82,14 @@ public partial class Unit : CharacterBody2D
 
         sprite.Modulate = Colors.Red;
         flashTimer.Start();
-        
+
         if (health <= 0)
         {
             GameEvents.RaiseUnitDied();
             QueueFree();
         }
+
+        healthBar.Value = health;
     }
 
     private void TryAttackTarget()

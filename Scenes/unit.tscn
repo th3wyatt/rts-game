@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://m6bmlhqqiw1k"]
+[gd_scene load_steps=6 format=3 uid="uid://m6bmlhqqiw1k"]
 
 [ext_resource type="Script" path="res://Scripts/Unit.cs" id="1_meptf"]
 [ext_resource type="Texture2D" uid="uid://dxk0cbnbt8hlo" path="res://Assets/Units/oryx_16bit_fantasy_creatures_01.png" id="1_yoy3x"]
@@ -6,10 +6,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_emyes"]
 size = Vector2(22, 24)
 
-[node name="Unit" type="CharacterBody2D" node_paths=PackedStringArray("agent", "sprite", "flashTimer") groups=["units"]]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vl1xc"]
+bg_color = Color(0.00566115, 0.00566115, 0.00566114, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpvnc"]
+bg_color = Color(0.140637, 0.722611, 0.118669, 1)
+
+[node name="Unit" type="CharacterBody2D" node_paths=PackedStringArray("agent", "sprite", "healthBar", "flashTimer") groups=["units"]]
 script = ExtResource("1_meptf")
 agent = NodePath("NavigationAgent2D")
 sprite = NodePath("Sprite")
+healthBar = NodePath("HealthBar")
 flashTimer = NodePath("Timer")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -26,3 +33,13 @@ path_max_distance = 10.0
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -11.0
+offset_top = -15.0
+offset_right = 11.0
+offset_bottom = -13.0
+theme_override_styles/background = SubResource("StyleBoxFlat_vl1xc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lpvnc")
+value = 50.0
+show_percentage = false

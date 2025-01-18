@@ -1912,6 +1912,7 @@ position = Vector2(-919, -477)
 
 [node name="EnemyUnit" parent="EnemyUnits" instance=ExtResource("5_x20i0")]
 position = Vector2(53, 31)
+maxHealth = 70.0
 health = 70.0
 moveSpeed = 35.0
 
@@ -1931,5 +1932,6 @@ position = Vector2(0, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_emkij")
+volume_db = -33.676
 autoplay = true
 parameters/looping = true
