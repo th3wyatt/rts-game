@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://m6bmlhqqiw1k" path="res://Scenes/unit.tscn" id="1_2f5nm"]
 [ext_resource type="Script" path="res://Scripts/PlayerUnit.cs" id="2_ddfas"]
-[ext_resource type="PackedScene" uid="uid://dqrvt7rnsdncl" path="res://Scenes/ui_unit_selection.tscn" id="3_lqijg"]
+[ext_resource type="PackedScene" uid="uid://dqrvt7rnsdncl" path="res://Scenes/UI/ui_unit_selection.tscn" id="3_lqijg"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p2mrk"]
 load_path = "res://.godot/imported/tile_0060.png-a61765fa0d5c42c96088c4062cf0f242.ctex"

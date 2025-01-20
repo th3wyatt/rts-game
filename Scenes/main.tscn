@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_bc11n"]
 [ext_resource type="Texture2D" uid="uid://t65il7mjc4g7" path="res://Assets/oryx_16bit_fantasy_world_trans.png" id="2_optns"]
-[ext_resource type="PackedScene" uid="uid://ctep4c8xq84ov" path="res://Scenes/ui.tscn" id="2_st5tc"]
+[ext_resource type="PackedScene" uid="uid://ctep4c8xq84ov" path="res://Scenes/UI/ui.tscn" id="2_st5tc"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="3_s4djx"]
 [ext_resource type="PackedScene" uid="uid://ctp35kbkwx2i0" path="res://Scenes/player_unit.tscn" id="4_842g8"]
 [ext_resource type="PackedScene" uid="uid://xpp6f7f1fwhs" path="res://Scenes/player_villager_unit.tscn" id="5_popbi"]
@@ -1889,6 +1889,7 @@ navigation_polygon = SubResource("NavigationPolygon_f7eck")
 navigation_polygon = SubResource("NavigationPolygon_5wauo")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("camera")]
+position = Vector2(-821, -344)
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("3_s4djx")
 camera = NodePath(".")

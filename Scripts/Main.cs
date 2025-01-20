@@ -79,17 +79,19 @@ public partial class Main : Node2D
         {
             foreach (Node item in selectedUnits)
             {
-                try
+                switch (item)
                 {
-                    PlayerUnit unit = (PlayerUnit)item;
-                    unit.ToggleSelectionVisual();
-                    unit.RemoveFromGroup(GameConstants.SELECTED_UNITS);
-
-                }
-                catch (System.Exception)
-                {
-                    
-                    GD.Print("could not remove selected visual to this unit");
+                    case PlayerBuildingBase building:
+                        building.ToggleSelectionVisual();
+                        building.RemoveFromGroup(GameConstants.SELECTED_UNITS);
+                        break;
+                    case PlayerUnit unit:
+                        unit.ToggleSelectionVisual();
+                        unit.RemoveFromGroup(GameConstants.SELECTED_UNITS);
+                        break;
+                    default:
+                        GD.Print("could not add selected visual to this unit");
+                        break;
                 }
               
             }
