@@ -1900,21 +1900,16 @@ movementSpeed = 503.619
 [node name="PlayerUnit" parent="PlayerUnits" instance=ExtResource("4_842g8")]
 position = Vector2(-818, -414)
 collision_mask = 3
+stats = null
 
 [node name="PlayerVillagerUnit" parent="PlayerUnits" instance=ExtResource("5_popbi")]
-position = Vector2(-830, -497)
-collision_mask = 3
-damage = 20
+position = Vector2(-958, -461)
 
 [node name="PlayerVillagerUnit2" parent="PlayerUnits" instance=ExtResource("5_popbi")]
-position = Vector2(-874, -467)
-collision_mask = 3
-damage = 20
+position = Vector2(-901, -446)
 
 [node name="PlayerVillagerUnit3" parent="PlayerUnits" instance=ExtResource("5_popbi")]
-position = Vector2(-919, -477)
-collision_mask = 3
-damage = 20
+position = Vector2(-1011, -492)
 
 [node name="EnemyUnits" type="Node" parent="."]
 
@@ -1930,7 +1925,7 @@ position = Vector2(-972, -592)
 [node name="ResourceNodes" type="Node" parent="."]
 
 [node name="ResourceNode" parent="ResourceNodes" instance=ExtResource("6_mmc6f")]
-amount = 10000
+amount = 1000.0
 
 [node name="SelectionBox" parent="." instance=ExtResource("10_4r5jf")]
 visible = false

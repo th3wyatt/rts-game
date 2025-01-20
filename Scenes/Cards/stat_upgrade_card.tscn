@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://ipmdjy5g8tfj"]
+
+[ext_resource type="PackedScene" uid="uid://bkhtblftf6ss1" path="res://Scenes/Cards/card.tscn" id="1_pt15v"]
+[ext_resource type="Script" path="res://Scripts/CardResources/StatUpgradeCard.cs" id="2_ihmi2"]
+[ext_resource type="Script" path="res://Scripts/Resources/StatResource.cs" id="3_3wn87"]
+
+[sub_resource type="Resource" id="Resource_jcaid"]
+script = ExtResource("3_3wn87")
+Stat = 3
+StatValue = 1.0
+
+[node name="StatUpgradeCard" node_paths=PackedStringArray("cardName", "cardCostLabel", "cardPicture", "cardText") instance=ExtResource("1_pt15v")]
+script = ExtResource("2_ihmi2")
+stat = SubResource("Resource_jcaid")
+cardName = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Name")
+cardCostLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Cost")
+cardPicture = NodePath("MarginContainer/VBoxContainer/TextureRect")
+cardText = NodePath("MarginContainer/VBoxContainer/Label")
+cardCost = 10
+
+[node name="Name" parent="MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+text = "Lumberjack Tools"
+
+[node name="Cost" parent="MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+text = "10 G"
+
+[node name="Label" parent="MarginContainer/VBoxContainer" index="2"]
+text = "Increase wood gathered by 100%"
+horizontal_alignment = 1

@@ -1,6 +1,8 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Linq;
+using System.Net.Http.Headers;
 
 public partial class ResourceNode : StaticBody2D
 {
@@ -8,10 +10,11 @@ public partial class ResourceNode : StaticBody2D
     [Export] MaterialResource resourcePool;
     [Export] Area2D gatherArea;
     [Export] Timer gatherTimer;
-    [Export] int amount = 100;
-    [Export] int gatherRate = 10;
-    [Export] int gatherTime = 1;
+    [Export] float amount = 100;
+    float gatherRate = 0;
+    float gatherAmount = 0;
     private int gathererCount;
+    private Array<PlayerVillagerUnit> gatherers = new Array<PlayerVillagerUnit>();
 
     public override void _Ready()
     {
@@ -25,8 +28,8 @@ public partial class ResourceNode : StaticBody2D
     {
         if(gatherArea.HasOverlappingBodies())
         {
-            amount -= gatherRate * gathererCount;
-            resourcePool.MaterialValue += gatherRate * gathererCount;
+            amount -= gatherAmount;
+            resourcePool.MaterialValue += (int)Math.Round(gatherAmount);
             GD.Print("Gathered " + resourcePool.materialType + " " + amount +" Remaining!");
             
             
@@ -46,26 +49,54 @@ public partial class ResourceNode : StaticBody2D
     {
         if(gathererCount > 0)
         {
-            gathererCount--;
-            return;
+            gatherers.Remove((PlayerVillagerUnit)body);
+            RecalculateGatherStats();
         }
-        gatherTimer.Stop();
+        else
+        {
+            gatherTimer.Stop();
+        }
+        
         
     }
 
 
     private void HandleBodyEntered(Node2D body)
     {
-        GD.Print(body.Name + " Entered Area!");
-        GD.Print("Groups: " + body.GetGroups());
         if(body.IsInGroup("villagers"))
         {
-            gathererCount++;
+
+            gatherers.Add((PlayerVillagerUnit)body);
+
             
-            GD.Print("Gatherer added to " + Name);
+            RecalculateGatherStats();
+            
+            gatherTimer.WaitTime = gatherRate;
             gatherTimer.Start();
 
         }
     }
 
+    private void RecalculateGatherStats()
+    {
+        gatherRate = 0;
+        gatherAmount = 0;
+        gathererCount = 0;
+        foreach (PlayerVillagerUnit villager in gatherers)
+        {
+            gatherAmount += villager.GetStatResource(Stats.GatherAmountWood).StatValue;
+            if(gatherRate <= 0)
+            {
+                gatherRate = villager.GetStatResource(Stats.GatherRateWood).StatValue;
+                
+            } else
+            {
+                gatherRate = ((gatherRate * gathererCount) 
+                    + villager.GetStatResource(Stats.GatherRateWood).StatValue) / (gathererCount +1);
+            }
+            gathererCount++;
+        }
+        GD.Print("Gather Amount: " + gatherAmount);
+        GD.Print("Gather Rate: "+ gatherRate);
+    }
 }
