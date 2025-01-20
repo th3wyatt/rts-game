@@ -2,6 +2,7 @@ using Godot;
 using System;
 using Godot.Collections;
 using System.Linq;
+using System.Collections;
 
 
 public partial class Main : Node2D
@@ -51,17 +52,19 @@ public partial class Main : Node2D
         {
             foreach (Node item in selectedUnits)
             {
-                try
+                switch (item)
                 {
-                    PlayerUnit unit = (PlayerUnit)item;
-                    unit.ToggleSelectionVisual();
-                    uiController.unitSelectionGrid.AddChild(unit.uiSelectionPanel);
-                    uiController.SelectionPanel.Visible = true;
-                }
-                catch (Exception)
-                {
-                    
-                    GD.Print("could not add selected visual to this unit");
+                    case PlayerBuildingBase building:
+                        building.ToggleSelectionVisual();
+                        break;
+                    case PlayerUnit unit:
+                        unit.ToggleSelectionVisual();
+                        uiController.unitSelectionGrid.AddChild(unit.uiSelectionPanel);
+                        uiController.SelectionPanel.Visible = true;
+                        break;
+                    default:
+                        GD.Print("could not add selected visual to this unit");
+                        break;
                 }
               
             }

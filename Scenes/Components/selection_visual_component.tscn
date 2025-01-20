@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://wt5fnatq5drt"]
+
+[ext_resource type="Script" path="res://Scripts/Components/SelectionVisualComponent.cs" id="1_lu3x1"]
+
+[node name="SelectionVisualComponent" type="Node"]
+script = ExtResource("1_lu3x1")

@@ -3,8 +3,8 @@ using System;
 
 public partial class PlayerUnit : Unit
 {
-    [Export] private Sprite2D selectionVisual;
     [Export] private PackedScene uiSelectionItem;
+    [Export] private Sprite2D selectionVisualSprite;
     public UiUnitSelection uiSelectionPanel;
 
     public override void _Ready()
@@ -14,18 +14,17 @@ public partial class PlayerUnit : Unit
         uiSelectionPanel = uiSelectionItem.Instantiate<UiUnitSelection>();
         healthBar.ValueChanged += OnHealthBarValueChanged;
         uiSelectionPanel.texture.Texture = sprite.Texture;
-        uiSelectionPanel.healthLabel.Text = health.ToString();
+        uiSelectionPanel.healthLabel.Text = healthComponent.CurrentHealth.ToString();
           
     }
 
     private void OnHealthBarValueChanged(double value)
     {
-        uiSelectionPanel.healthLabel.Text = health.ToString();
+        uiSelectionPanel.healthLabel.Text = healthComponent.CurrentHealth.ToString();
     }
-
 
     public void ToggleSelectionVisual()
     {
-        selectionVisual.Visible = !selectionVisual.Visible;
+        selectionVisualSprite.Visible = !selectionVisualSprite.Visible;
     }
 }

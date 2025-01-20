@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://m6bmlhqqiw1k"]
+[gd_scene load_steps=7 format=3 uid="uid://m6bmlhqqiw1k"]
 
 [ext_resource type="Script" path="res://Scripts/Unit.cs" id="1_meptf"]
 [ext_resource type="Texture2D" uid="uid://dxk0cbnbt8hlo" path="res://Assets/Units/oryx_16bit_fantasy_creatures_01.png" id="1_yoy3x"]
+[ext_resource type="PackedScene" uid="uid://b173pfd6dqedh" path="res://Scenes/Components/health_component.tscn" id="3_gqcph"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_emyes"]
 size = Vector2(22, 24)
@@ -12,11 +13,12 @@ bg_color = Color(0.00566115, 0.00566115, 0.00566114, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpvnc"]
 bg_color = Color(0.140637, 0.722611, 0.118669, 1)
 
-[node name="Unit" type="CharacterBody2D" node_paths=PackedStringArray("agent", "sprite", "healthBar", "flashTimer") groups=["units"]]
+[node name="Unit" type="CharacterBody2D" node_paths=PackedStringArray("agent", "sprite", "healthBar", "healthComponent", "flashTimer") groups=["units"]]
 script = ExtResource("1_meptf")
 agent = NodePath("NavigationAgent2D")
 sprite = NodePath("Sprite")
 healthBar = NodePath("HealthBar")
+healthComponent = NodePath("HealthComponent")
 flashTimer = NodePath("Timer")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -43,3 +45,5 @@ theme_override_styles/background = SubResource("StyleBoxFlat_vl1xc")
 theme_override_styles/fill = SubResource("StyleBoxFlat_lpvnc")
 value = 50.0
 show_percentage = false
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_gqcph")]

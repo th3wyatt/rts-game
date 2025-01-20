@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://xpp6f7f1fwhs" path="res://Scenes/player_villager_unit.tscn" id="5_popbi"]
 [ext_resource type="PackedScene" uid="uid://c23ld6nokmp38" path="res://Scenes/enemy_unit.tscn" id="5_x20i0"]
 [ext_resource type="PackedScene" uid="uid://0boas2ku2ufk" path="res://Scenes/resource_node.tscn" id="6_mmc6f"]
-[ext_resource type="PackedScene" uid="uid://bwe625l0vjd8l" path="res://Scenes/town_hall.tscn" id="9_gv47s"]
+[ext_resource type="PackedScene" uid="uid://b7mchsa406bwc" path="res://Scenes/town_hall.tscn" id="9_gv47s"]
 [ext_resource type="PackedScene" uid="uid://cwdgtfvhwpklc" path="res://Scenes/selection_box.tscn" id="10_4r5jf"]
 [ext_resource type="AudioStream" uid="uid://dsaxssm2jn3uh" path="res://Assets/Town_-_Campfire_Tales.ogg" id="11_emkij"]
 
@@ -1897,33 +1897,34 @@ movementSpeed = 503.619
 [node name="PlayerUnits" type="Node" parent="."]
 
 [node name="PlayerUnit" parent="PlayerUnits" instance=ExtResource("4_842g8")]
-position = Vector2(-208, 29)
+position = Vector2(-818, -414)
 collision_mask = 3
 
 [node name="PlayerVillagerUnit" parent="PlayerUnits" instance=ExtResource("5_popbi")]
 position = Vector2(-830, -497)
 collision_mask = 3
+damage = 20
 
 [node name="PlayerVillagerUnit2" parent="PlayerUnits" instance=ExtResource("5_popbi")]
 position = Vector2(-874, -467)
 collision_mask = 3
+damage = 20
 
 [node name="PlayerVillagerUnit3" parent="PlayerUnits" instance=ExtResource("5_popbi")]
 position = Vector2(-919, -477)
 collision_mask = 3
+damage = 20
 
 [node name="EnemyUnits" type="Node" parent="."]
 
 [node name="EnemyUnit" parent="EnemyUnits" instance=ExtResource("5_x20i0")]
-position = Vector2(53, 31)
-maxHealth = 70.0
-health = 70.0
+position = Vector2(-684, -371)
 moveSpeed = 35.0
 
 [node name="PlayerStructures" type="Node" parent="."]
 
 [node name="TownHall" parent="PlayerStructures" instance=ExtResource("9_gv47s")]
-position = Vector2(-946, -595)
+position = Vector2(-972, -592)
 
 [node name="ResourceNodes" type="Node" parent="."]
 

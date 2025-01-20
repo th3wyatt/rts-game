@@ -1,6 +1,8 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Diagnostics;
+using System.Linq;
 
 public partial class SelectionBox : Node2D
 {
@@ -17,7 +19,6 @@ public partial class SelectionBox : Node2D
     {
         if (isSelecting)
         {
-            GD.Print("updating rect");
             Vector2 mousePosition = GetGlobalMousePosition(); 
             selectionRect = new Rect2(selectionStart, mousePosition - selectionStart).Abs();
             ninePatchRect.Position = selectionRect.Position;
@@ -38,12 +39,53 @@ public partial class SelectionBox : Node2D
     {
         if(isSelecting)
         {
-            GD.Print("End selection start");
             isSelecting = false;
             ninePatchRect.Visible = false;
-            TrySelectUnit();
+            //TrySelectUnit();
+            ProcessSelection();
         }
 
+    }
+
+    private void ProcessSelection()
+    {
+        PhysicsDirectSpaceState2D space = GetWorld2D().DirectSpaceState;
+        PhysicsPointQueryParameters2D query = new();
+        query.Position = GetGlobalMousePosition();
+        Array<Dictionary> intersection = space.IntersectPoint(query, 1);
+
+        if (intersection.Count > 0)
+        {
+            GodotObject selectedObject = intersection[0]["collider"].AsGodotObject();
+            GD.Print("Thing Clicked: " + selectedObject.GetType().BaseType);
+            switch (selectedObject)
+            {
+                case PlayerBuildingBase buildingBase:
+                    TrySelectItem(buildingBase);
+                    break;
+                case PlayerUnit playerUnit:
+                    TrySelectItem(playerUnit);
+                    break;
+
+                default:
+                    GD.Print("Nothing fit in seleciton categories");
+                    break;
+
+            }
+        }
+        ProcessSelectionBox();
+        
+    }
+
+    private void ProcessSelectionBox()
+    {
+        foreach (Unit item in GetTree().GetNodesInGroup(GameConstants.UNITS).Cast<Unit>())
+        {
+            if (selectionRect.HasPoint(item.GlobalPosition))
+            {
+                item.AddToGroup(GameConstants.SELECTED_UNITS);
+            }
+        }
     }
 
     public void DragSelectionBox()
@@ -51,10 +93,8 @@ public partial class SelectionBox : Node2D
         
         if (isSelecting)
         {
-            GD.Print("Dragging!");
             if (selectionRect.Size.Length() > 32)
             {
-                GD.Print("ITS VISIBLE!");
                 ninePatchRect.Visible = true;
             }else{
                 ninePatchRect.Visible = false;
@@ -62,25 +102,12 @@ public partial class SelectionBox : Node2D
         }
     }
 
-    private void TrySelectUnit()
+    private void TrySelectItem(Node item)
     {
        
-        GD.Print("trying to get a clicked unit");
-        Unit unit = GetSelectedUnit();
+        item?.AddToGroup(GameConstants.SELECTED_UNITS); // for single unit selection
 
-        if (unit != null)
-        {
-            unit.AddToGroup(GameConstants.SELECTED_UNITS);
-        }
-
-        foreach (Unit item in GetTree().GetNodesInGroup(GameConstants.UNITS))
-        {
-            if (selectionRect.HasPoint(item.GlobalPosition))
-            {
-                item.AddToGroup(GameConstants.SELECTED_UNITS);
-            }
-        }
-   }
+    }
 
     public Unit GetSelectedUnit()
     {
