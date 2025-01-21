@@ -22,6 +22,7 @@ public partial class ResourceNode : StaticBody2D
         gatherArea.BodyEntered += HandleBodyEntered;
         gatherArea.BodyExited += HandleBodyExited;
         gatherTimer.Timeout += HandleTimeout;
+        GameEvents.OnStatCardPressed += HandleStatCardPressed;
     }
 
     private void HandleTimeout()
@@ -67,15 +68,22 @@ public partial class ResourceNode : StaticBody2D
         {
 
             gatherers.Add((PlayerVillagerUnit)body);
-
-            
             RecalculateGatherStats();
-            
             gatherTimer.WaitTime = gatherRate;
             gatherTimer.Start();
+            
 
         }
     }
+
+    private void HandleStatCardPressed(StatResource resource)
+    {
+        if (resource.Stat == Stats.GatherAmountWood || resource.Stat == Stats.GatherRateWood)
+        {
+            RecalculateGatherStats();
+        }
+    }
+
 
     private void RecalculateGatherStats()
     {

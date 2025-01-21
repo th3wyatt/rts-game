@@ -23,6 +23,7 @@ public partial class PlayerUnit : Unit
 
     private void HandleStatCardPressed(StatResource resource)
     {
+        GD.Print("Upgrading " + resource.Stat);
         StatResource statToChange = GetStatResource(resource.Stat);
         if (statToChange != null)
         {

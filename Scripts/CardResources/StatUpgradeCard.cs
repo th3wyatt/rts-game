@@ -14,7 +14,8 @@ public partial class StatUpgradeCard : Card
 
     private void OnCardButtonPressed()
     {
-        GameEvents.RaiseStatCardPressed(stat);
         GD.Print("raising stat card pressed");
+        GameEvents.RaiseStatCardPressed(stat);
+        
     }
 }
