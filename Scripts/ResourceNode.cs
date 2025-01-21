@@ -84,7 +84,6 @@ public partial class ResourceNode : StaticBody2D
         }
     }
 
-
     private void RecalculateGatherStats()
     {
         gatherRate = 0;
@@ -92,15 +91,15 @@ public partial class ResourceNode : StaticBody2D
         gathererCount = 0;
         foreach (PlayerVillagerUnit villager in gatherers)
         {
-            gatherAmount += villager.GetStatResource(Stats.GatherAmountWood).StatValue;
+            gatherAmount += villager.PlayerController.GetStatResource(Stats.GatherAmountWood).StatValue;
             if(gatherRate <= 0)
             {
-                gatherRate = villager.GetStatResource(Stats.GatherRateWood).StatValue;
+                gatherRate = villager.PlayerController.GetStatResource(Stats.GatherRateWood).StatValue;
                 
             } else
             {
                 gatherRate = ((gatherRate * gathererCount) 
-                    + villager.GetStatResource(Stats.GatherRateWood).StatValue) / (gathererCount +1);
+                    + villager.PlayerController.GetStatResource(Stats.GatherRateWood).StatValue) / (gathererCount +1);
             }
             gathererCount++;
         }

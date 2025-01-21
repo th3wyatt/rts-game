@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://taxvwpwtv317"]
+[gd_scene load_steps=28 format=4 uid="uid://taxvwpwtv317"]
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_bc11n"]
 [ext_resource type="Texture2D" uid="uid://t65il7mjc4g7" path="res://Assets/oryx_16bit_fantasy_world_trans.png" id="2_optns"]
@@ -6,11 +6,22 @@
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="3_s4djx"]
 [ext_resource type="PackedScene" uid="uid://ctp35kbkwx2i0" path="res://Scenes/player_unit.tscn" id="4_842g8"]
 [ext_resource type="PackedScene" uid="uid://xpp6f7f1fwhs" path="res://Scenes/player_villager_unit.tscn" id="5_popbi"]
+[ext_resource type="Script" path="res://Scripts/PlayerUnitController.cs" id="5_vkeqq"]
 [ext_resource type="PackedScene" uid="uid://c23ld6nokmp38" path="res://Scenes/enemy_unit.tscn" id="5_x20i0"]
+[ext_resource type="Resource" uid="uid://qtccsmsn6djn" path="res://Scenes/Resources/PlayerStatResources/gather_amount_gold.tres" id="6_h2y3w"]
 [ext_resource type="PackedScene" uid="uid://0boas2ku2ufk" path="res://Scenes/resource_node.tscn" id="6_mmc6f"]
+[ext_resource type="Resource" uid="uid://chsahuvoxm6ds" path="res://Scenes/Resources/PlayerStatResources/gather_amount_stone.tres" id="7_qc7am"]
+[ext_resource type="Resource" uid="uid://dq1t1mhj5qyb6" path="res://Scenes/Resources/PlayerStatResources/gather_amount_wood.tres" id="8_pqfcu"]
 [ext_resource type="PackedScene" uid="uid://b7mchsa406bwc" path="res://Scenes/town_hall.tscn" id="9_gv47s"]
+[ext_resource type="Resource" uid="uid://dqk5lknwady5h" path="res://Scenes/Resources/PlayerStatResources/gather_rate_gold.tres" id="9_xphjw"]
 [ext_resource type="PackedScene" uid="uid://cwdgtfvhwpklc" path="res://Scenes/selection_box.tscn" id="10_4r5jf"]
+[ext_resource type="Resource" uid="uid://d2683mwb3kuhr" path="res://Scenes/Resources/PlayerStatResources/gather_rate_stone.tres" id="10_dfk0r"]
 [ext_resource type="AudioStream" uid="uid://dsaxssm2jn3uh" path="res://Assets/Town_-_Campfire_Tales.ogg" id="11_emkij"]
+[ext_resource type="Resource" uid="uid://cetsllqwy4ukm" path="res://Scenes/Resources/PlayerStatResources/gather_rate_wood.tres" id="11_t3asn"]
+[ext_resource type="Resource" uid="uid://idnhmh44avdr" path="res://Scenes/Resources/PlayerStatResources/health.tres" id="12_ml671"]
+[ext_resource type="Resource" uid="uid://u17vgjtn2yp" path="res://Scenes/Resources/PlayerStatResources/villager_damage.tres" id="13_wab8t"]
+[ext_resource type="Resource" uid="uid://dv3hk1spwpbsw" path="res://Scenes/Resources/PlayerStatResources/villager_health.tres" id="14_48mnk"]
+[ext_resource type="Resource" uid="uid://c06cw1k6oi8m7" path="res://Scenes/Resources/PlayerStatResources/armor.tres" id="15_p7g5d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0y07e"]
 texture = ExtResource("2_optns")
@@ -1896,20 +1907,25 @@ camera = NodePath(".")
 movementSpeed = 503.619
 
 [node name="PlayerUnits" type="Node" parent="."]
+script = ExtResource("5_vkeqq")
+stats = Array[Object]([ExtResource("6_h2y3w"), ExtResource("7_qc7am"), ExtResource("8_pqfcu"), ExtResource("9_xphjw"), ExtResource("10_dfk0r"), ExtResource("11_t3asn"), ExtResource("12_ml671"), ExtResource("13_wab8t"), ExtResource("14_48mnk"), ExtResource("15_p7g5d")])
 
-[node name="PlayerUnit" parent="PlayerUnits" instance=ExtResource("4_842g8")]
+[node name="PlayerUnit" parent="PlayerUnits" node_paths=PackedStringArray("PlayerController") instance=ExtResource("4_842g8")]
 position = Vector2(-818, -414)
 collision_mask = 3
-stats = null
+PlayerController = NodePath("..")
 
-[node name="PlayerVillagerUnit" parent="PlayerUnits" instance=ExtResource("5_popbi")]
+[node name="PlayerVillagerUnit" parent="PlayerUnits" node_paths=PackedStringArray("PlayerController") instance=ExtResource("5_popbi")]
 position = Vector2(-958, -461)
+PlayerController = NodePath("..")
 
-[node name="PlayerVillagerUnit2" parent="PlayerUnits" instance=ExtResource("5_popbi")]
+[node name="PlayerVillagerUnit2" parent="PlayerUnits" node_paths=PackedStringArray("PlayerController") instance=ExtResource("5_popbi")]
 position = Vector2(-901, -446)
+PlayerController = NodePath("..")
 
-[node name="PlayerVillagerUnit3" parent="PlayerUnits" instance=ExtResource("5_popbi")]
+[node name="PlayerVillagerUnit3" parent="PlayerUnits" node_paths=PackedStringArray("PlayerController") instance=ExtResource("5_popbi")]
 position = Vector2(-1011, -492)
+PlayerController = NodePath("..")
 
 [node name="EnemyUnits" type="Node" parent="."]
 

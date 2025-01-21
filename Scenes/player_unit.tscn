@@ -1,18 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctp35kbkwx2i0"]
+[gd_scene load_steps=9 format=3 uid="uid://ctp35kbkwx2i0"]
 
 [ext_resource type="PackedScene" uid="uid://m6bmlhqqiw1k" path="res://Scenes/unit.tscn" id="1_2f5nm"]
 [ext_resource type="Script" path="res://Scripts/PlayerUnit.cs" id="2_ddfas"]
 [ext_resource type="PackedScene" uid="uid://dqrvt7rnsdncl" path="res://Scenes/UI/ui_unit_selection.tscn" id="3_lqijg"]
+[ext_resource type="Script" path="res://Scripts/Components/PlayerStatComponent.cs" id="4_o1o60"]
+[ext_resource type="Resource" uid="uid://idnhmh44avdr" path="res://Scenes/Resources/PlayerStatResources/health.tres" id="5_h6q6u"]
+[ext_resource type="Resource" uid="uid://c06cw1k6oi8m7" path="res://Scenes/Resources/PlayerStatResources/armor.tres" id="6_3cmkl"]
+[ext_resource type="Resource" uid="uid://bcsp5554a3vqn" path="res://Scenes/Resources/PlayerStatResources/damage.tres" id="7_8a2l3"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p2mrk"]
 load_path = "res://.godot/imported/tile_0060.png-a61765fa0d5c42c96088c4062cf0f242.ctex"
 
-[node name="PlayerUnit" node_paths=PackedStringArray("selectionVisualSprite") instance=ExtResource("1_2f5nm")]
+[node name="PlayerUnit" node_paths=PackedStringArray("selectionVisualSprite", "PlayerStatComponent") instance=ExtResource("1_2f5nm")]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("2_ddfas")
 uiSelectionItem = ExtResource("3_lqijg")
 selectionVisualSprite = NodePath("SelectionVisualSprite")
+PlayerStatComponent = NodePath("PlayerStatComponent")
 damage = 25
 isPlayer = true
 
@@ -22,3 +27,7 @@ self_modulate = Color(0, 0.740278, 0.351004, 1)
 position = Vector2(1.07288e-06, 0)
 scale = Vector2(1.75, 1.875)
 texture = SubResource("CompressedTexture2D_p2mrk")
+
+[node name="PlayerStatComponent" type="Node" parent="." index="7"]
+script = ExtResource("4_o1o60")
+stats = Array[Object]([ExtResource("5_h6q6u"), ExtResource("6_3cmkl"), ExtResource("7_8a2l3")])

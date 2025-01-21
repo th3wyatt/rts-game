@@ -3,57 +3,25 @@
 [ext_resource type="PackedScene" uid="uid://ctp35kbkwx2i0" path="res://Scenes/player_unit.tscn" id="1_704aj"]
 [ext_resource type="Script" path="res://Scripts/PlayerVillagerUnit.cs" id="2_ahctw"]
 [ext_resource type="Texture2D" uid="uid://cq3odjwe2eu4" path="res://Assets/Units/oryx_16bit_fantasy_creatures_38.png" id="2_ni6yo"]
-[ext_resource type="Script" path="res://Scripts/Resources/StatResource.cs" id="3_mbplw"]
+[ext_resource type="Script" path="res://Scripts/Components/VillagerStatComponent.cs" id="4_dbtl7"]
+[ext_resource type="Resource" uid="uid://dv3hk1spwpbsw" path="res://Scenes/Resources/PlayerStatResources/villager_health.tres" id="5_gvqff"]
+[ext_resource type="Resource" uid="uid://u17vgjtn2yp" path="res://Scenes/Resources/PlayerStatResources/villager_damage.tres" id="6_8csso"]
+[ext_resource type="Resource" uid="uid://cetsllqwy4ukm" path="res://Scenes/Resources/PlayerStatResources/gather_rate_wood.tres" id="7_rxt57"]
+[ext_resource type="Resource" uid="uid://d2683mwb3kuhr" path="res://Scenes/Resources/PlayerStatResources/gather_rate_stone.tres" id="8_liwjo"]
+[ext_resource type="Resource" uid="uid://dqk5lknwady5h" path="res://Scenes/Resources/PlayerStatResources/gather_rate_gold.tres" id="9_ii40x"]
+[ext_resource type="Resource" uid="uid://dq1t1mhj5qyb6" path="res://Scenes/Resources/PlayerStatResources/gather_amount_wood.tres" id="10_nw7so"]
+[ext_resource type="Resource" uid="uid://chsahuvoxm6ds" path="res://Scenes/Resources/PlayerStatResources/gather_amount_stone.tres" id="11_xr4c8"]
+[ext_resource type="Resource" uid="uid://qtccsmsn6djn" path="res://Scenes/Resources/PlayerStatResources/gather_amount_gold.tres" id="12_6cwhh"]
+[ext_resource type="Resource" uid="uid://c06cw1k6oi8m7" path="res://Scenes/Resources/PlayerStatResources/armor.tres" id="13_5x0q3"]
 
-[sub_resource type="Resource" id="Resource_u602a"]
-script = ExtResource("3_mbplw")
-Stat = 0
-StatValue = 5.0
-
-[sub_resource type="Resource" id="Resource_x1m3u"]
-script = ExtResource("3_mbplw")
-Stat = 1
-StatValue = 5.0
-
-[sub_resource type="Resource" id="Resource_s0gsy"]
-script = ExtResource("3_mbplw")
-Stat = 2
-StatValue = 5.0
-
-[sub_resource type="Resource" id="Resource_e67ow"]
-script = ExtResource("3_mbplw")
-Stat = 7
-StatValue = 100.0
-
-[sub_resource type="Resource" id="Resource_ncdl4"]
-script = ExtResource("3_mbplw")
-Stat = 6
-StatValue = 10.0
-
-[sub_resource type="Resource" id="Resource_namw1"]
-script = ExtResource("3_mbplw")
-Stat = 8
-StatValue = 1.0
-
-[sub_resource type="Resource" id="Resource_ujevt"]
-script = ExtResource("3_mbplw")
-Stat = 4
-StatValue = 1.0
-
-[sub_resource type="Resource" id="Resource_1owda"]
-script = ExtResource("3_mbplw")
-Stat = 5
-StatValue = 1.0
-
-[sub_resource type="Resource" id="Resource_1m1pa"]
-script = ExtResource("3_mbplw")
-Stat = 3
-StatValue = 1.0
-
-[node name="PlayerVillagerUnit" instance=ExtResource("1_704aj")]
+[node name="PlayerVillagerUnit" node_paths=PackedStringArray("PlayerStatComponent") instance=ExtResource("1_704aj")]
 collision_mask = 3
 script = ExtResource("2_ahctw")
-stats = Array[Object]([SubResource("Resource_u602a"), SubResource("Resource_x1m3u"), SubResource("Resource_s0gsy"), SubResource("Resource_e67ow"), SubResource("Resource_ncdl4"), SubResource("Resource_namw1"), SubResource("Resource_ujevt"), SubResource("Resource_1owda"), SubResource("Resource_1m1pa")])
+PlayerStatComponent = NodePath("VillagerStatComponent")
 
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource("2_ni6yo")
+
+[node name="VillagerStatComponent" type="Node" parent="." index="7"]
+script = ExtResource("4_dbtl7")
+stats = Array[Object]([ExtResource("5_gvqff"), ExtResource("6_8csso"), ExtResource("7_rxt57"), ExtResource("8_liwjo"), ExtResource("9_ii40x"), ExtResource("10_nw7so"), ExtResource("11_xr4c8"), ExtResource("12_6cwhh"), ExtResource("13_5x0q3")])
