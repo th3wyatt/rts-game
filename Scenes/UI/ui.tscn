@@ -124,7 +124,6 @@ layout_mode = 2
 text = "Cards"
 
 [node name="Cards" type="PanelContainer" parent="." node_paths=PackedStringArray("ButtonNode")]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -137,7 +136,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_8qp4c")
-ButtonNode = NodePath("MarginContainer/VBoxContainer/Button")
+ButtonNode = NodePath("MarginContainer/HBoxContainer/CardHandContainer/Button")
 
 [node name="MarginContainer" type="MarginContainer" parent="Cards"]
 layout_mode = 2
@@ -146,18 +145,46 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Cards/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Cards/MarginContainer"]
+layout_mode = 2
+
+[node name="CardHandContainer" type="VBoxContainer" parent="Cards/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Cards/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Cards/MarginContainer/HBoxContainer/CardHandContainer"]
 layout_mode = 2
 
-[node name="StatUpgradeCard" parent="Cards/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("7_x5kxl")]
+[node name="StatUpgradeCard" parent="Cards/MarginContainer/HBoxContainer/CardHandContainer/HBoxContainer" instance=ExtResource("7_x5kxl")]
 layout_mode = 2
 stat = SubResource("Resource_rf74g")
 
-[node name="Button" type="Button" parent="Cards/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="Cards/MarginContainer/HBoxContainer/CardHandContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Close"
+
+[node name="RightCardAreaContainer" type="VBoxContainer" parent="Cards/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="DeckLabel" type="Label" parent="Cards/MarginContainer/HBoxContainer/RightCardAreaContainer"]
+layout_mode = 2
+text = "Card Deck"
+horizontal_alignment = 1
+
+[node name="CardDeckContainer" type="PanelContainer" parent="Cards/MarginContainer/HBoxContainer/RightCardAreaContainer"]
+custom_minimum_size = Vector2(96, 152)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Cards/MarginContainer/HBoxContainer/RightCardAreaContainer/CardDeckContainer"]
+layout_mode = 2
+tooltip_text = "Draw A Card!"
+text = "DECK"
+
+[node name="Label" type="Label" parent="Cards/MarginContainer/HBoxContainer/RightCardAreaContainer"]
+layout_mode = 2
+text = "Active Cards"
+horizontal_alignment = 1
+
+[node name="ActiveCardContainer" type="PanelContainer" parent="Cards/MarginContainer/HBoxContainer/RightCardAreaContainer"]
+layout_mode = 2
